@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output , output} from '@angular/core';
 import { User } from "./user/user";
 import {mockUsers} from "./user/user.mock";
 
@@ -11,7 +11,8 @@ import {mockUsers} from "./user/user.mock";
 
 export class Users {
   users= mockUsers;
-  @Output() userId = new EventEmitter<number>();
+  // @Output() userId = new EventEmitter<number>();
+  userId = output<number>();
   
   onUserIdClick(id: number) {
     this.userId.emit(id);

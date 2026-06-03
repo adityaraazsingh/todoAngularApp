@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { Cards } from "../../../reuseable/cards/cards";
 import { TaskDetails } from '../../../bo/tasksBo';
 import { DatePipe } from '@angular/common';
@@ -10,9 +10,10 @@ import { DatePipe } from '@angular/common';
   styleUrl: './task.css',
 })
 export class Task {
-  @Input({required: true}) task!: TaskDetails;
+  // @Input({required: true}) task!: TaskDetails;
+  task = input.required<TaskDetails>();
 
   onCompleteClick() {
-    this.task.completed = true;
+    this.task().completed = true;
   }
 }

@@ -1,10 +1,10 @@
-@if(!task.completed){
+@if(!task().completed){
   <app-cards>
     <div class="task-card">
       <div>
-        <h3>{{ task.title }}</h3>
-        <p>{{ task.description }}</p>
-        <p>{{ task.date | date }}</p>
+        <h3>{{ task().title }}</h3>
+        <p>{{ task().description }}</p>
+        <p>{{ task().date | date }}</p>
       </div>
 
       <button class="complete-button"  (click)="onCompleteClick()">Mark as Complete</button>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input , input } from '@angular/core';
 import { Task } from "./task/task";
 import { mockTasks } from "./task/task.mock";
 import { TaskDetails } from '../../bo/tasksBo';
@@ -10,11 +10,12 @@ import { AddTask } from './add-task/add-task';
   styleUrl: './tasks.css',
 })
 export class Tasks {
-  @Input({required: true}) userId! : number;
+  // @Input({required: true}) userId! : number;
+  userId = input.required<number>();
   closeDialog = true;
 
   get mockTasks() {
-    return mockTasks.filter(task => task.userId === this.userId);
+    return mockTasks.filter(task => task.userId === this.userId());
   }
 
   toggleDialog(){
@@ -23,7 +24,7 @@ export class Tasks {
 
   addNewTask($event : {title: string, description: string, date : string}) {
     const mocktask : TaskDetails = {
-      userId : this.userId,
+      userId : this.userId(),
       id : Math.floor(Math.random() * 1000),
       title : $event.title,
       date : $event.date,

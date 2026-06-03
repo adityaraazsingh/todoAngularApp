@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output , input } from '@angular/core';
 import { Cards } from "../../../reuseable/cards/cards";
 import { UserDetails } from '../../../bo/userBo';
 
@@ -9,5 +9,6 @@ import { UserDetails } from '../../../bo/userBo';
   styleUrl: './user.css',
 })
 export class User {
-  @Input({required: true}) user! : UserDetails;
+  // @Input({required: true}) user! : UserDetails;
+  user = input.required<UserDetails>();
 }
