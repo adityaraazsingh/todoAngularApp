@@ -1,0 +1,22 @@
+<dialog class="add-task-dialog" open>
+  <div class="dialog-card">
+    <form (ngSubmit)="onSubmit()">
+      <p>
+        <label>Enter the Title</label>
+        <input name="title" type="text" [(ngModel)]="title" />
+      </p>
+      <p>
+        <label>Enter the Description</label>
+        <input name="description" type="text" [(ngModel)]="description" />
+      </p>
+      <p>
+        <label>Enter the Description</label>
+        <input name="description" type="date" [(ngModel)]="date" />
+      </p>
+      <div class="dialog-actions">
+        <button type="button" (click)="onClose()">Cancel</button>
+        <button type="submit">Add Task</button>
+      </div>
+    </form>
+  </div>
+</dialog>

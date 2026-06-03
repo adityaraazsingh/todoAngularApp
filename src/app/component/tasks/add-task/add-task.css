@@ -1,0 +1,77 @@
+.add-task-dialog {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.16);
+  padding: 1rem;
+  z-index: 50;
+}
+
+.dialog-card {
+  width: min(520px, 100%);
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+  padding: 1.75rem;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+form p {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+input:focus {
+  border-color: #0f172a;
+  background: #ffffff;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+button {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.9rem 1.15rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+button[type="button"] {
+  background: transparent;
+  color: #0f172a;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}

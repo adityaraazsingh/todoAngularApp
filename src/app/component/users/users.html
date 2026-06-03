@@ -1,0 +1,16 @@
+<section class="users-panel">
+  <div class="users-header">
+    <div>
+      <h2>Team Members</h2>
+      <p>Quick access to the active team with clean profile previews.</p>
+    </div>
+  </div>
+
+  <div class="users-list">
+    <app-user [user]="users[0]" (click)="onUserIdClick(users[0].id)"></app-user>
+    <app-user [user]="users[1]" (click)="onUserIdClick(users[1].id)"></app-user>
+    <app-user [user]="users[2]" (click)="onUserIdClick(users[2].id)"></app-user>
+    <app-user [user]="users[3]" (click)="onUserIdClick(users[3].id)"></app-user>
+    <app-user [user]="users[4]" (click)="onUserIdClick(users[4].id)"></app-user>
+  </div>
+</section>
