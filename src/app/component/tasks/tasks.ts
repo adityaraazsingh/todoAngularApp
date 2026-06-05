@@ -1,4 +1,4 @@
-import { Component, inject , input } from '@angular/core';
+import { Component, inject , input, computed } from '@angular/core';
 import { Task } from "./task/task";
 import { AddTask } from './add-task/add-task';
 import { appService } from '../../app.service';
@@ -13,9 +13,9 @@ export class Tasks {
   closeDialog = true;
   appService = inject(appService);
 
-  get mockTasks(){
+  mockTasks = computed(()=>{
     return this.appService.mockTasks(this.userId());
-  }
+  })
 
   toggleDialog(){
     this.closeDialog = false;

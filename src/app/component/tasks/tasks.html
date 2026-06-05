@@ -11,8 +11,8 @@
   </div>
 
   <div class="tasks-list">
-    @if (mockTasks.length > 0) {
-      @for(task of mockTasks; track task.id)
+    @if (mockTasks().length > 0) {
+      @for(task of mockTasks(); track task.id)
       {
         <app-task [task]="task"></app-task>
       }

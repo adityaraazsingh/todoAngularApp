@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from "@angular/core";
 import { TaskDetails } from "./bo/tasksBo";
 import { HttpClient } from "@angular/common/http";
-import { tap } from "rxjs";
+import { map, tap } from "rxjs";
 
 @Injectable({providedIn : 'root'})
 
@@ -36,6 +36,8 @@ export class appService{
   }
 
   onCompleteClick(task : TaskDetails) {
+    this.allTasks.set(this.allTasks().map((t) => task.id===t.id ? {...t , completed : true} : t));
+
     return this.httpClient.put("http://localhost:8080/api/tasks/addOrUpdate",{
       id : task.id,
       userId :task.userId,
@@ -43,15 +45,7 @@ export class appService{
       description : task.description,
       date : task.date ,
       completed: true
-    }).pipe(
-      tap(() => {
-        this.allTasks.set(
-          this.allTasks().map(tsk =>
-            tsk.id === task.id ? { ...tsk, completed: true } : tsk
-          )
-        );
-      })
-    );
+    });
   }
 
 }

@@ -30,7 +30,7 @@ export class AddTask {
     }
     const subscription = this.appService.addAndUpdateTask(task).subscribe();
     this.closeDialog.emit();
-    this.destroyRef.onDestroy(()=> subscription.unsubscribe());
+    // this.destroyRef.onDestroy(()=> subscription.unsubscribe());
   }
 
   onClose() {
