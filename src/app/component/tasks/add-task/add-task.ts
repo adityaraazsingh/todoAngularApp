@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Output , output} from '@angular/core';
+import { Component, EventEmitter, inject, Output, output, input, DestroyRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { appService } from '../../../app.service';
+import { TaskDetails } from '../../../bo/tasksBo';
 
 @Component({
   selector: 'app-add-task',
@@ -9,19 +11,26 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddTask {
 
-  
-  title='';
-  description='';
-  date='';
+  userId = input.required<number>();
+  title = '';
+  description = '';
+  date = '';
 
-  // @Output() newTask = new EventEmitter();
-  // @Output() closeDialog = new EventEmitter<void>();
-  newTask = output<{title : string , description : string , date : string}>();
+  newTask = output<{ title: string, description: string, date: string }>();
   closeDialog = output<void>();
+  destroyRef = inject(DestroyRef);
+  appService = inject(appService);
 
   onSubmit() {
-    this.newTask.emit({ title: this.title, description: this.description, date: this.date });
+    const task :  TaskDetails = {
+      userId : this.userId(),
+      title : this.title,
+      description : this.description,
+      date : this.date
+    }
+    const subscription = this.appService.addAndUpdateTask(task).subscribe();
     this.closeDialog.emit();
+    this.destroyRef.onDestroy(()=> subscription.unsubscribe());
   }
 
   onClose() {

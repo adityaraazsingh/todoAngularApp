@@ -1,5 +1,5 @@
 @if(closeDialog == false) {
-  <app-add-task (closeDialog)="onCloseDialog()" (newTask)="addNewTask($event)"></app-add-task>
+  <app-add-task [userId]="this.userId()" (closeDialog)="onCloseDialog()"></app-add-task>
 }
 <section class="tasks-panel">
   <div class="tasks-header">

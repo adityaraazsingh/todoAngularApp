@@ -1,8 +1,7 @@
-import { Component, Input , input } from '@angular/core';
+import { Component, inject , input } from '@angular/core';
 import { Task } from "./task/task";
-import { mockTasks } from "./task/task.mock";
-import { TaskDetails } from '../../bo/tasksBo';
 import { AddTask } from './add-task/add-task';
+import { appService } from '../../app.service';
 @Component({
   selector: 'app-tasks',
   imports: [Task, AddTask],
@@ -10,28 +9,16 @@ import { AddTask } from './add-task/add-task';
   styleUrl: './tasks.css',
 })
 export class Tasks {
-  // @Input({required: true}) userId! : number;
   userId = input.required<number>();
   closeDialog = true;
+  appService = inject(appService);
 
-  get mockTasks() {
-    return mockTasks.filter(task => task.userId === this.userId());
+  get mockTasks(){
+    return this.appService.mockTasks(this.userId());
   }
 
   toggleDialog(){
     this.closeDialog = false;
-  }
-
-  addNewTask($event : {title: string, description: string, date : string}) {
-    const mocktask : TaskDetails = {
-      userId : this.userId(),
-      id : Math.floor(Math.random() * 1000),
-      title : $event.title,
-      date : $event.date,
-      description : $event.description,
-      completed : false
-    }
-    mockTasks.push(mocktask);
   }
 
   onCloseDialog(){

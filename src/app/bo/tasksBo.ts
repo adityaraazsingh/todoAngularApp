@@ -1,8 +1,8 @@
 export interface TaskDetails{
-    id: number;
+    id?: number;
     userId: number;
     title: string;
     description: string;
-    date?: string;
-    completed: boolean;
+    date: string;
+    completed?: boolean;
 }

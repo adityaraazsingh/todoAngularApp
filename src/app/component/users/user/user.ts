@@ -9,6 +9,5 @@ import { UserDetails } from '../../../bo/userBo';
   styleUrl: './user.css',
 })
 export class User {
-  // @Input({required: true}) user! : UserDetails;
   user = input.required<UserDetails>();
 }

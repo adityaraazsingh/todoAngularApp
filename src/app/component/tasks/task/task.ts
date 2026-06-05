@@ -1,7 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, OnInit  } from '@angular/core';
 import { Cards } from "../../../reuseable/cards/cards";
 import { TaskDetails } from '../../../bo/tasksBo';
 import { DatePipe } from '@angular/common';
+import { appService } from '../../../app.service';
 
 @Component({
   selector: 'app-task',
@@ -10,10 +11,10 @@ import { DatePipe } from '@angular/common';
   styleUrl: './task.css',
 })
 export class Task {
-  // @Input({required: true}) task!: TaskDetails;
   task = input.required<TaskDetails>();
+  appService = inject(appService);
 
-  onCompleteClick() {
-    this.task().completed = true;
+  onCompleteClick(task : TaskDetails){
+    this.appService.onCompleteClick(task).subscribe();
   }
 }

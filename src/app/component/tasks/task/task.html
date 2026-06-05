@@ -7,7 +7,7 @@
         <p>{{ task().date | date }}</p>
       </div>
 
-      <button class="complete-button"  (click)="onCompleteClick()">Mark as Complete</button>
+      <button class="complete-button"  (click)="onCompleteClick(task())">Mark as Complete</button>
     </div>
   </app-cards>
 }
