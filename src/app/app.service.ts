@@ -27,12 +27,13 @@ export class appService{
   }
 
   addAndUpdateTask(task : TaskDetails){
+    // this.loadTasks();
     return this.httpClient.put("http://localhost:8080/api/tasks/addOrUpdate",{
       userId :task.userId? task.userId : null,
       title : task.title,
       description : task.description,
       date : task.date 
-    });
+    }).pipe(tap(() => this.loadTasks()));
   }
 
   onCompleteClick(task : TaskDetails) {

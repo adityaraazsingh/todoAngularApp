@@ -6,6 +6,7 @@
   background: rgba(15, 23, 42, 0.16);
   padding: 1rem;
   z-index: 50;
+  width: 50%;
 }
 
 .dialog-card {
@@ -75,3 +76,15 @@ button[type="button"] {
 button:hover {
   transform: translateY(-1px);
 }
+
+button:disabled {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.9rem 1.15rem;
+  background: #8d8e8f;
+  color: #ffffff;
+  font-weight: 700;
+  cursor:not-allowed;
+  /* transition: background 0.2s ease, transform 0.15s ease; */
+}
+

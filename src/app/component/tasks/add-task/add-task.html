@@ -1,21 +1,25 @@
 <dialog class="add-task-dialog" open>
   <div class="dialog-card">
-    <form (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
       <p>
         <label>Enter the Title</label>
-        <input name="title" type="text" [(ngModel)]="title" />
+        <input name="title" type="text" [(ngModel)]="title" required />
       </p>
       <p>
         <label>Enter the Description</label>
-        <input name="description" type="text" [(ngModel)]="description" />
+        <input name="description" type="text" [(ngModel)]="description" required/>
       </p>
       <p>
-        <label>Enter the Description</label>
-        <input name="description" type="date" [(ngModel)]="date" />
+        <label>Enter the Date</label>
+        <input name="date" type="date" [(ngModel)]="date" required #date="ngModel"/>
       </p>
+      @if(form.invalid && form.touched){
+        <p style="color: red;">Please fill in all required fields.</p>
+      }
+      <!-- TODO : Add validation for when date is empty add task gets enabled -->
       <div class="dialog-actions">
         <button type="button" (click)="onClose()">Cancel</button>
-        <button type="submit">Add Task</button>
+        <button [disabled]="form.invalid" type="submit">Add Task</button>
       </div>
     </form>
   </div>
