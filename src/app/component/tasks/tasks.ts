@@ -1,4 +1,4 @@
-import { Component, inject , input, computed } from '@angular/core';
+import { Component, inject , input, computed, OnInit } from '@angular/core';
 import { Task } from "./task/task";
 import { AddTask } from './add-task/add-task';
 import { appService } from '../../app.service';
@@ -8,7 +8,7 @@ import { appService } from '../../app.service';
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
 })
-export class Tasks {
+export class Tasks implements OnInit{
   userId = input.required<number>();
   closeDialog = true;
   appService = inject(appService);
@@ -16,6 +16,10 @@ export class Tasks {
   mockTasks = computed(()=>{
     return this.appService.mockTasks(this.userId());
   })
+
+  ngOnInit(){
+    this.appService.loadTasksPerRender();
+  }
 
   toggleDialog(){
     this.closeDialog = false;

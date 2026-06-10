@@ -2,6 +2,9 @@ import { inject, Injectable, signal } from "@angular/core";
 import { TaskDetails } from "./bo/tasksBo";
 import { HttpClient } from "@angular/common/http";
 import { map, tap } from "rxjs";
+import { authCred } from "./bo/authCreds";
+import { UserDetails } from "./bo/userBo";
+import { userCred } from "./bo/userCreds";
 
 @Injectable({providedIn : 'root'})
 
@@ -10,9 +13,6 @@ export class appService{
   private httpClient = inject(HttpClient);
   allTasks = signal<TaskDetails[]>([]);
 
-  constructor(){
-    this.loadTasks();
-  }
 
   private loadTasks(){
     this.httpClient.get<TaskDetails[]>('http://localhost:8080/api/tasks').subscribe(
@@ -20,6 +20,10 @@ export class appService{
         this.allTasks.set(data || []);
       }
     );
+  }
+
+  loadTasksPerRender(){
+    this.loadTasks();
   }
 
   mockTasks(userId : number) {
@@ -47,6 +51,15 @@ export class appService{
       date : task.date ,
       completed: true
     });
+  }
+
+  logIn(logincred : authCred){
+    this.loadTasks();
+    return this.httpClient.post("http://localhost:8080/api/users",logincred);
+  }
+
+  signUp(user : userCred){
+    return this.httpClient.post("http://localhost:8080/api/users/add-user",user);
   }
 
 }

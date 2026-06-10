@@ -1,0 +1,30 @@
+<div class="login-container">
+  <section class="login-panel card">
+    <div class="login-header">
+      <h2>{{ isLoggingIn ? 'Welcome back' : 'Create account' }}</h2>
+      <p>
+        {{ isLoggingIn ? 'Sign in to manage your todo list.' : 'Register to start tracking tasks today.' }}
+      </p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="login-form">
+      <label for="userName">Username</label>
+      <input id="userName" type="text" formControlName="userName" placeholder="Enter your username" />
+
+      <label for="password">Password</label>
+      <input id="password" type="password" formControlName="password" placeholder="Enter your password" />
+        @if(!isLoggingIn){
+            <label for="assets">Assets</label>
+            <input id="assets" type="text" formControlName="assets" placeholder="Enter assets" />
+        }
+      <div class="login-actions">
+        <button type="submit" class="primary-button">
+          {{ isLoggingIn ? 'Log In' : 'Sign Up' }}
+        </button>
+        <button type="button" class="secondary-button" (click)="onClick()">
+          {{ isLoggingIn ? 'Sign Up' : 'Log In' }}
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

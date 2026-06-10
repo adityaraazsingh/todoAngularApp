@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import com.todo.backend.security.securityConfig.*;
 
 import java.util.List;
+import java.util.Map;
 
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/api/users")
 @RestController
 public class usersController {
@@ -42,7 +43,7 @@ public class usersController {
   }
 
   @PostMapping
-  private String login(@RequestBody LoginCredential loginCredential){
+  private Map<String, String> login(@RequestBody LoginCredential loginCredential){
     Authentication authentication = authenticationManager.authenticate(
       new UsernamePasswordAuthenticationToken(
         loginCredential.getUserName(),
@@ -51,7 +52,8 @@ public class usersController {
     );
 
     if(authentication.isAuthenticated()){
-      return jwtUtil.generateToken(loginCredential.getUserName());
+      String token = jwtUtil.generateToken(loginCredential.getUserName());
+      return Map.of("token" , token);
     }else{
       throw new RuntimeException("Invalid Credentials");
     }

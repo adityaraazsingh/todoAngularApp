@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+//@CrossOrigin
 @RequestMapping("/api/tasks")
 @RestController
 public class taskController {
@@ -17,8 +17,7 @@ public class taskController {
 
   @GetMapping
   private List<taskEntity> getAllTasks(){
-    return taskRepository.findAll();
-  }
+    return taskRepository.findAll();}
 
   @PutMapping("/addOrUpdate")
   private taskEntity updateOrAddTask(@RequestBody taskEntity task){
