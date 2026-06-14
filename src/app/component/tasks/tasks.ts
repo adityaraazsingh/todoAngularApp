@@ -17,7 +17,7 @@ export class Tasks implements OnInit{
     return this.appService.mockTasks(this.userId());
   })
 
-  ngOnInit(){
+  ngOnInit(): void {
     this.appService.loadTasksPerRender();
   }
 

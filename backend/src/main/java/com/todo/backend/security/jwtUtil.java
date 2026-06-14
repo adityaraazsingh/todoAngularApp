@@ -1,5 +1,6 @@
 package com.todo.backend.security;
 
+import com.todo.backend.Enum.rolesEnum;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -17,9 +18,11 @@ public class jwtUtil {
     return Keys.hmacShaKeyFor(SECRET.getBytes());
   }
 
-  public String generateToken(String username){
+  public String generateToken(String username , rolesEnum role){
     return Jwts.builder()
       .setSubject(username)
+      .claim("username", username)
+      .claim("role",role)
       .setIssuedAt(new Date())
       .setExpiration(new Date(System.currentTimeMillis() + 1000 *60 *60))
       .signWith(getSignKey(), SignatureAlgorithm.HS256)

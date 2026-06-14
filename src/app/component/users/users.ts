@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Output , output} from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output , output} from '@angular/core';
 import { User } from "./user/user";
 import {mockUsers} from "./user/user.mock";
+import { appService } from '../../app.service';
+import { userCred } from '../../bo/userCreds';
 
 @Component({
   selector: 'app-users',
@@ -9,12 +11,27 @@ import {mockUsers} from "./user/user.mock";
   styleUrl: './users.css',
 })
 
-export class Users {
-  users= mockUsers;
-  // @Output() userId = new EventEmitter<number>();
+export class Users implements OnInit {
+  users!: userCred[];
   userId = output<number>();
+  appService = inject(appService);
+  usersAll! : userCred[];
+
+  ngOnInit(): void {
+    this.appService.getUserYouManages().subscribe(
+      (data)=>{
+        this.users = data
+        console.log(this.usersAll)
+      }
+    );
+  }
   
-  onUserIdClick(id: number) {
-    this.userId.emit(id);
+  onUserIdClick(id: number|undefined) {
+    if(id){
+      this.userId.emit(id);
+      console.log("Its runing")
+    }
+    else
+      return;
   }
 }

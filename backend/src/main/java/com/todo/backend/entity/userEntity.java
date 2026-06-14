@@ -1,9 +1,7 @@
 package com.todo.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.todo.backend.Enum.rolesEnum;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,17 +14,38 @@ import lombok.Setter;
 public class userEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long user_id;
+  private Long userId;
   private String userName;
   private String password;
   private String avatar;
 
-  public Long getUser_id() {
-    return user_id;
+  @Enumerated(EnumType.STRING)
+  private rolesEnum role;
+
+  public rolesEnum getRole() {
+    return role;
   }
 
-  public void setUser_id(Long user_id) {
-    this.user_id = user_id;
+  public void setRole(rolesEnum role) {
+    this.role = role;
+  }
+
+  private Long[] manages;
+
+  public Long getUserId() {
+    return userId;
+  }
+
+  public Long[] getManages() {
+    return manages;
+  }
+
+  public void setManages(Long[] manages) {
+    this.manages = manages;
+  }
+
+  public void setUser_id(Long userId) {
+    this.userId = userId;
   }
 
   public String getUserName() {

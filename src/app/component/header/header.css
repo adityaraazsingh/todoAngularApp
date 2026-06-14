@@ -21,3 +21,19 @@
   font-size: 1rem;
   line-height: 1.6;
 }
+
+.logout-button {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.85rem 1.4rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.logout-button:hover {
+  background: #111827;
+  transform: translateY(-1px);
+}

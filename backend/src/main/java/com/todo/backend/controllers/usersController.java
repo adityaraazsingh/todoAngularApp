@@ -1,5 +1,6 @@
 package com.todo.backend.controllers;
 
+import com.todo.backend.Enum.rolesEnum;
 import com.todo.backend.bo.LoginCredential;
 import com.todo.backend.entity.userEntity;
 import com.todo.backend.repo.usersRepository;
@@ -15,7 +16,6 @@ import com.todo.backend.security.securityConfig.*;
 import java.util.List;
 import java.util.Map;
 
-//@CrossOrigin
 @RequestMapping("/api/users")
 @RestController
 public class usersController {
@@ -32,9 +32,15 @@ public class usersController {
   @Autowired
   private userService userService;
 
-  @GetMapping
+  @GetMapping("/role")
+  private rolesEnum getUsersRole(@RequestParam String userName){
+    rolesEnum role = this.userRepository.findByUserName(userName).getRole();
+    return role;
+  }
+
+  @GetMapping("/all")
   private List<userEntity> getAllUsers(){
-    return userRepository.findAll();
+    return this.userRepository.findAll();
   }
 
   @PostMapping("/add-user")
@@ -51,11 +57,19 @@ public class usersController {
       )
     );
 
+    rolesEnum role = rolesEnum.valueOf(loginCredential.getUserName().split("/")[0]);
+
     if(authentication.isAuthenticated()){
-      String token = jwtUtil.generateToken(loginCredential.getUserName());
+      String token = jwtUtil.generateToken(loginCredential.getUserName(), role);
       return Map.of("token" , token);
     }else{
       throw new RuntimeException("Invalid Credentials");
     }
+  }
+
+  @GetMapping("/manages")
+  private List<userEntity> getUsersUserIsManaging(@RequestParam String userName){
+    Long[] ids = this.userRepository.findByUserName(userName).getManages();
+    return this.userRepository.findByUserIdIn(ids);
   }
 }

@@ -2,9 +2,11 @@
   <app-header></app-header>
 
   <main class="layout">
-    <aside class="sidebar">
-      <app-users (userId)="onUserClick($event)"></app-users>
-    </aside>
+    @if(this.role === "ADMIN"){
+      <aside class="sidebar">
+        <app-users (userId)="onUserClick($event)"></app-users>
+      </aside>
+    }
 
     <section class="content">
       <app-tasks [userId]="userId" ></app-tasks>

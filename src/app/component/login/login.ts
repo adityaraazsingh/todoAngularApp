@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { appService } from '../../app.service';
 import { authCred } from '../../bo/authCreds';
 import { Router } from '@angular/router';
+import { RolesEnum, userCred } from '../../bo/userCreds';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +11,30 @@ import { Router } from '@angular/router';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {
+export class Login implements OnInit{
 
-  // authenticated = isLoggedIn;
   isLoggingIn = true ;
   appService = inject(appService);
   router = inject(Router);
   loginCred! : authCred;
+  RolesEnum = RolesEnum;
+  users! : userCred[];
 
   form = new FormGroup({
     userName : new FormControl('aditya' ,[Validators.required]),
     password : new FormControl('123123'),
-    assests : new FormControl()
+    role: new FormControl(RolesEnum.USER),
+    assests : new FormControl(),
+    manages : new FormControl()
   })
+
+  ngOnInit(): void {
+    this.appService.getAllUser().subscribe({
+      next : (data) => {
+        this.users = data;
+      }
+    })
+  }
 
   onSubmit(){
     if(this.isLoggingIn){
@@ -41,7 +53,9 @@ export class Login {
       this.appService.signUp({
         userName : this.form.value.userName!,
         password: this.form.value.password!,
-        avatar: this.form.value.assests
+        avatar: this.form.value.assests,
+        manages : [this.form.value.manages],
+        role : this.form.value.role!
       }).subscribe({
         next : (data) =>{
           console.log("Signned Up ",data.valueOf);

@@ -5,12 +5,9 @@
       <p>Quick access to the active team with clean profile previews.</p>
     </div>
   </div>
-
   <div class="users-list">
-    <app-user [user]="users[0]" (click)="onUserIdClick(users[0].id)"></app-user>
-    <app-user [user]="users[1]" (click)="onUserIdClick(users[1].id)"></app-user>
-    <app-user [user]="users[2]" (click)="onUserIdClick(users[2].id)"></app-user>
-    <app-user [user]="users[3]" (click)="onUserIdClick(users[3].id)"></app-user>
-    <app-user [user]="users[4]" (click)="onUserIdClick(users[4].id)"></app-user>
+  @for(user of users ; track user.userId){
+      <app-user [user]=user (click)="onUserIdClick(user.userId)"></app-user>
+  }
   </div>
 </section>
