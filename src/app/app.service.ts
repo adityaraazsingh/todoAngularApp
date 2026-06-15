@@ -98,8 +98,8 @@ export class appService{
     this.router.navigateByUrl('/login');
   }
 
-  signUp(user : userCred){
-    return this.httpClient.post("http://localhost:8080/api/users/add-user",user);
+  signUp(form : FormData){
+    return this.httpClient.post("http://localhost:8080/api/users/add-user",form);
   }
 
 }

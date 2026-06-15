@@ -5,14 +5,20 @@ import com.todo.backend.bo.LoginCredential;
 import com.todo.backend.entity.userEntity;
 import com.todo.backend.repo.usersRepository;
 import com.todo.backend.security.jwtUtil;
+import com.todo.backend.service.fileService;
 import com.todo.backend.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import com.todo.backend.security.securityConfig.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +38,9 @@ public class usersController {
   @Autowired
   private userService userService;
 
+  @Autowired
+  private fileService fileService;
+
   @GetMapping("/role")
   private rolesEnum getUsersRole(@RequestParam String userName){
     rolesEnum role = this.userRepository.findByUserName(userName).getRole();
@@ -43,8 +52,19 @@ public class usersController {
     return this.userRepository.findAll();
   }
 
-  @PostMapping("/add-user")
-  private userEntity signUp(@RequestBody userEntity user){
+  @PostMapping(value = "/add-user")
+  private userEntity signUp( @RequestParam("userName") String userName,
+                             @RequestParam("password") String password,
+                             @RequestParam("role") rolesEnum role,
+                             @RequestParam(value = "manages",required = false) Long[] manages,
+                             @RequestParam(value = "avatar", required = false) MultipartFile avatar) throws IOException {
+    userEntity user = new userEntity();
+    user.setUserName(userName);
+    user.setPassword(password);
+    user.setRole(role);
+    user.setManages(manages);
+    user.setAvatar(avatar.getBytes());
+
     return userService.saveUser(user);
   }
 
@@ -69,7 +89,16 @@ public class usersController {
 
   @GetMapping("/manages")
   private List<userEntity> getUsersUserIsManaging(@RequestParam String userName){
-    Long[] ids = this.userRepository.findByUserName(userName).getManages();
+    Long[] ids = this.userRepository.findByUserName(userName).getManages();System.out.println("Ids that we are fetching "+ids.toString() + "and the username we got " + userName);
     return this.userRepository.findByUserIdIn(ids);
+  }
+
+  @GetMapping("/avatar/{id}")
+  public ResponseEntity<byte[]> getAvatarById(@PathVariable Long id){
+    userEntity user = this.userRepository.findByUserId(id);
+
+    return ResponseEntity.ok()
+      .header(HttpHeaders.CONTENT_TYPE, "image/png")
+      .body(user.getAvatar());
   }
 }

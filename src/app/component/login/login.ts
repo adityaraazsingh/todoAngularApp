@@ -19,13 +19,14 @@ export class Login implements OnInit{
   loginCred! : authCred;
   RolesEnum = RolesEnum;
   users! : userCred[];
+  selectedFile: File | null = null;
 
   form = new FormGroup({
     userName : new FormControl('aditya' ,[Validators.required]),
     password : new FormControl('123123'),
     role: new FormControl(RolesEnum.USER),
     assests : new FormControl(),
-    manages : new FormControl()
+    manages : new FormControl<number[]>([])
   })
 
   ngOnInit(): void {
@@ -50,13 +51,21 @@ export class Login implements OnInit{
         }
       });
     }else{
-      this.appService.signUp({
-        userName : this.form.value.userName!,
-        password: this.form.value.password!,
-        avatar: this.form.value.assests,
-        manages : [this.form.value.manages],
-        role : this.form.value.role!
-      }).subscribe({
+      const formData = new FormData();
+
+      formData.append('userName', this.form.value.userName!);
+      formData.append('password', this.form.value.password!);
+      formData.append('role', this.form.value.role!);
+
+      if (this.selectedFile) {
+        formData.append('avatar', this.selectedFile); // 🔥 THIS is the file
+      }
+
+      this.form.value.manages?.forEach((id: number) => {
+        formData.append('manages', id.toString());
+      });
+      console.log("Form Data: ", formData);
+      this.appService.signUp(formData).subscribe({
         next : (data) =>{
           console.log("Signned Up ",data.valueOf);
           window.alert("Signned Up Successfully, Please Log In Now");
@@ -69,4 +78,9 @@ export class Login implements OnInit{
   onClick() {
     this.isLoggingIn = !this.isLoggingIn;
   }
+
+  onFileSelected(event : any){
+    this.selectedFile = event.target.files[0];
+  }
+
 }

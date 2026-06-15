@@ -17,7 +17,8 @@ public class userEntity {
   private Long userId;
   private String userName;
   private String password;
-  private String avatar;
+  @Lob
+  private byte[] avatar;
 
   @Enumerated(EnumType.STRING)
   private rolesEnum role;
@@ -64,11 +65,11 @@ public class userEntity {
     this.password = password;
   }
 
-  public String getAvatar() {
+  public byte[] getAvatar() {
     return avatar;
   }
 
-  public void setAvatar(String avatar) {
+  public void setAvatar(byte[] avatar) {
     this.avatar = avatar;
   }
 }

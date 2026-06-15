@@ -7,7 +7,7 @@ export interface userCred{
     userId?: number,
     userName : string;
     password : string;
-    avatar : string;
+    avatar : File;
     manages : number[];
     role : RolesEnum;
 }

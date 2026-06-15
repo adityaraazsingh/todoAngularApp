@@ -3,10 +3,11 @@
     <div>
       <h2>Team Members</h2>
       <p>Quick access to the active team with clean profile previews.</p>
+      {{users().length}} members
     </div>
   </div>
   <div class="users-list">
-  @for(user of users ; track user.userId){
+  @for(user of users() ; track user.userId){
       <app-user [user]=user (click)="onUserIdClick(user.userId)"></app-user>
   }
   </div>

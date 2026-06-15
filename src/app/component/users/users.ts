@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output , output} from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output , output , signal} from '@angular/core';
 import { User } from "./user/user";
 import {mockUsers} from "./user/user.mock";
 import { appService } from '../../app.service';
@@ -12,7 +12,7 @@ import { userCred } from '../../bo/userCreds';
 })
 
 export class Users implements OnInit {
-  users!: userCred[];
+  users= signal<userCred[]>([]);
   userId = output<number>();
   appService = inject(appService);
   usersAll! : userCred[];
@@ -20,8 +20,8 @@ export class Users implements OnInit {
   ngOnInit(): void {
     this.appService.getUserYouManages().subscribe(
       (data)=>{
-        this.users = data
-        console.log(this.usersAll)
+        this.users.set(data)
+        console.log(this.users())
       }
     );
   }
