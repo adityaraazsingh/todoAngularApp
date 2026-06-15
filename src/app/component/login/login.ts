@@ -22,7 +22,7 @@ export class Login implements OnInit{
   selectedFile: File | null = null;
 
   form = new FormGroup({
-    userName : new FormControl('aditya' ,[Validators.required]),
+    userName : new FormControl('ADMIN_adi' ,[Validators.required]),
     password : new FormControl('123123'),
     role: new FormControl(RolesEnum.USER),
     assests : new FormControl(),

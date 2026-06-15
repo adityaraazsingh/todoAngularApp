@@ -20,7 +20,7 @@ public class securityConfig {
 
   @Autowired
   private jwtFilter jwtFilter;
-
+// TODO : /uploads is not needed i guess
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
     http.csrf(csrf -> csrf.disable())
@@ -28,6 +28,7 @@ public class securityConfig {
       .authorizeHttpRequests(auth -> auth
         .requestMatchers("/h2-console/**").permitAll()
         .requestMatchers("/api/users/**").permitAll()
+        .requestMatchers("/uploads/**").permitAll()
         .anyRequest().authenticated()
       )
       .headers(headers->headers

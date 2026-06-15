@@ -1,6 +1,6 @@
 <app-cards>
   <div class="user-row">
-    <img [src]="'http://localhost:8080/api/users/avatar/' + user().userId" alt="{{user().userName}}'s avatar" class="avatar" />
-    <p class="user-name">{{ user().userName.split('/')[1] }}</p>
+    <img [src]="'http://localhost:8080/uploads/' + user().userName" alt="{{user().userName}}'s avatar" class="avatar" />
+    <p class="user-name">{{ user().userName.split('_')[1] }}</p>
   </div>
 </app-cards>

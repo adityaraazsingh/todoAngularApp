@@ -63,7 +63,7 @@ public class usersController {
     user.setPassword(password);
     user.setRole(role);
     user.setManages(manages);
-    user.setAvatar(avatar.getBytes());
+    user.setAvatar(fileService.save(avatar,userName));
 
     return userService.saveUser(user);
   }
@@ -77,7 +77,7 @@ public class usersController {
       )
     );
 
-    rolesEnum role = rolesEnum.valueOf(loginCredential.getUserName().split("/")[0]);
+    rolesEnum role = rolesEnum.valueOf(loginCredential.getUserName().split("_")[0]);
 
     if(authentication.isAuthenticated()){
       String token = jwtUtil.generateToken(loginCredential.getUserName(), role);
@@ -93,12 +93,12 @@ public class usersController {
     return this.userRepository.findByUserIdIn(ids);
   }
 
-  @GetMapping("/avatar/{id}")
-  public ResponseEntity<byte[]> getAvatarById(@PathVariable Long id){
-    userEntity user = this.userRepository.findByUserId(id);
-
-    return ResponseEntity.ok()
-      .header(HttpHeaders.CONTENT_TYPE, "image/png")
-      .body(user.getAvatar());
-  }
+//  @GetMapping("/avatar/{id}")
+//  public ResponseEntity<byte[]> getAvatarById(@PathVariable Long id){
+//    userEntity user = this.userRepository.findByUserId(id);
+//
+//    return ResponseEntity.ok()
+//      .header(HttpHeaders.CONTENT_TYPE, "image/png")
+//      .body(user.getAvatar());
+//  }
 }
