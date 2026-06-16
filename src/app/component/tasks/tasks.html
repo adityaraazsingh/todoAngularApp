@@ -1,5 +1,13 @@
 @if(closeDialog == false) {
-  <app-add-task [userId]="this.userId()" (closeDialog)="onCloseDialog()"></app-add-task>
+  <app-add-task 
+    [id]="this.tobeEditedTask().id"
+    [title]="this.tobeEditedTask().title" 
+    [description]="this.tobeEditedTask().description"
+    [date]="this.tobeEditedTask().date"
+    [userId]="this.userId()" 
+    (closeDialog)="onCloseDialog()"
+    >
+    </app-add-task>
 }
 <section class="tasks-panel">
   <div class="tasks-header">
@@ -14,10 +22,10 @@
     @if (mockTasks().length > 0) {
       @for(task of mockTasks(); track task.id)
       {
-        <app-task [task]="task"></app-task>
+        <app-task [task]="task" (onEditClickTask)="onEditTask($event)" ></app-task>
       }
     }@else {
-      <p class="empty-label">Select a person to see their tasks</p>
+      <p class="empty-label" style="text-align: center;">Select a person to see their tasks {{this.role}}</p>
     }
   </div>
 </section>

@@ -24,6 +24,9 @@ export class Layout implements OnInit {
 
   ngOnInit(): void {
     this.role = this.appService.getRoleOfUser();
+    if(this.role == RolesEnum.USER){
+      this.userId = this.appService.getUserId();
+    }
   }
 
   onUserClick($event: number) {

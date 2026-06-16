@@ -75,10 +75,9 @@ public class usersController {
       )
     );
 
-    rolesEnum role = rolesEnum.valueOf(loginCredential.getUserName().split("_")[0]);
-
+    userEntity user = this.userRepository.findByUserName(loginCredential.getUserName());
     if(authentication.isAuthenticated()){
-      String token = jwtUtil.generateToken(loginCredential.getUserName(), role);
+      String token = jwtUtil.generateToken(loginCredential.getUserName(), user.getRole() , user.getUserId());
       return Map.of("token" , token);
     }else{
       throw new RuntimeException("Invalid Credentials");

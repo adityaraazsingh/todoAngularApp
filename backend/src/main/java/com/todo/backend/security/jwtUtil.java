@@ -18,11 +18,12 @@ public class jwtUtil {
     return Keys.hmacShaKeyFor(SECRET.getBytes());
   }
 
-  public String generateToken(String username , rolesEnum role){
+  public String generateToken(String username , rolesEnum role, Long userId){
     return Jwts.builder()
       .setSubject(username)
       .claim("username", username)
       .claim("role",role)
+      .claim("userId",userId)
       .setIssuedAt(new Date())
       .setExpiration(new Date(System.currentTimeMillis() + 1000 *60 *60))
       .signWith(getSignKey(), SignatureAlgorithm.HS256)

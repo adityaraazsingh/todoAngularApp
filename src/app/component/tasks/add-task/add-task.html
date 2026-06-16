@@ -1,17 +1,17 @@
 <dialog class="add-task-dialog" open>
   <div class="dialog-card">
-    <form (ngSubmit)="onSubmit()" #form="ngForm">
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
       <p>
         <label>Enter the Title</label>
-        <input name="title" type="text" [(ngModel)]="title" required />
+        <input name="title" type="text" formControlName="title" required />
       </p>
       <p>
         <label>Enter the Description</label>
-        <input name="description" type="text" [(ngModel)]="description" required/>
+        <input name="description" type="text" formControlName="description" required/>
       </p>
       <p>
         <label>Enter the Date</label>
-        <input name="date" type="date" [(ngModel)]="date" required #date="ngModel"/>
+        <input name="date" type="date" formControlName="date" required/>
       </p>
       @if(form.invalid && form.touched){
         <p style="color: red;">Please fill in all required fields.</p>

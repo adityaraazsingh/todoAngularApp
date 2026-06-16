@@ -1,14 +1,17 @@
 <div class="app-shell">
   <app-header></app-header>
 
-  <main class="layout">
+  <main [class]="{
+    'layout-admin': this.role === 'ADMIN',
+    'layout-user': this.role !== 'ADMIN'
+  }">
     @if(this.role === "ADMIN"){
       <aside class="sidebar">
         <app-users (userId)="onUserClick($event)"></app-users>
       </aside>
     }
 
-    <section class="content">
+    <section class="content" [class.admin]="this.role === 'ADMIN'">
       <app-tasks [userId]="userId" ></app-tasks>
     </section>
   </main>

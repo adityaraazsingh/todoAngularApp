@@ -17,7 +17,7 @@ export class appService{
   managesId! : number[];
   userName! : string;
   role! : RolesEnum;
-
+  userId ! : number;
 
   private loadTasks(){
     this.httpClient.get<TaskDetails[]>('http://localhost:8080/api/tasks').subscribe(
@@ -43,6 +43,11 @@ export class appService{
       return this.httpClient.get<userCred[]>("http://localhost:8080/api/users/all");
   }
 
+  getUserId(){
+    this.getRoleAndUsernameOfUser();
+    return this.userId;
+  }
+
   getRoleAndUsernameOfUser() {
     const tokenObject = window.localStorage.getItem('saved-token');
     if(tokenObject){
@@ -50,6 +55,7 @@ export class appService{
       const decode: any = jwtDecode(token.token.token);
       this.role = decode.role;
       this.userName = decode.username;
+      this.userId = decode.userId;
     }
   }
 
@@ -68,6 +74,7 @@ export class appService{
 
   addAndUpdateTask(task : TaskDetails){
     return this.httpClient.put("http://localhost:8080/api/tasks/addOrUpdate",{
+      id: task.id? task.id : null,
       userId :task.userId? task.userId : null,
       title : task.title,
       description : task.description,

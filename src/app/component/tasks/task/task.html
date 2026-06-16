@@ -6,8 +6,10 @@
         <p>{{ task().description }}</p>
         <p>{{ task().date | date }}</p>
       </div>
-
-      <button class="complete-button"  (click)="onCompleteClick(task())">Mark as Complete</button>
+      <div style="display: flex ; gap:10px ; justify-content: center;align-items: center;">
+        <mat-icon style="cursor: pointer;" (click)="onEditClick(task())" class="material-icons-round">edit</mat-icon>
+        <button class="complete-button"  (click)="onCompleteClick(task())">Mark as Complete</button>
+      </div>
     </div>
   </app-cards>
 }
