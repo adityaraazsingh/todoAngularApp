@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { appService } from '../../app.service';
 import { authCred } from '../../bo/authCreds';
@@ -21,11 +21,13 @@ export class Login implements OnInit{
   users! : userCred[];
   selectedFile: File | null = null;
 
+  hasError = signal<boolean>(false);
+
   form = new FormGroup({
     userName : new FormControl('ADMIN_adi' ,[Validators.required]),
     password : new FormControl('123123'),
     role: new FormControl(RolesEnum.USER),
-    assests : new FormControl(),
+    assets : new FormControl(),
     manages : new FormControl<number[]>([])
   })
 
@@ -48,17 +50,24 @@ export class Login implements OnInit{
               "token":val
           }))
           this.router.navigate(['/']);
+        },
+        error : () =>{
+          this.hasError.set(true)
         }
       });
     }else{
       const formData = new FormData();
+      const payload ={
+        userName : this.form.value.userName! ,
+        password : this.form.value.password!,
+        role : this.form.value.role!,
+        manages : this.form.value.manages
+      };
 
-      formData.append('userName', this.form.value.userName!);
-      formData.append('password', this.form.value.password!);
-      formData.append('role', this.form.value.role!);
+      formData.append('user' , new Blob([JSON.stringify(payload)], { type: 'application/json' }));
 
       if (this.selectedFile) {
-        formData.append('avatar', this.selectedFile); // 🔥 THIS is the file
+        formData.append('avatar', this.selectedFile); 
       }
 
       this.form.value.manages?.forEach((id: number) => {
@@ -69,6 +78,9 @@ export class Login implements OnInit{
         next : (data) =>{
           console.log("Signned Up ",data.valueOf);
           window.alert("Signned Up Successfully, Please Log In Now");
+        },
+        error : () =>{
+          this.hasError.set(true)
         }
       
       });

@@ -1,4 +1,4 @@
-import { Component, inject , input, computed, OnInit } from '@angular/core';
+import { Component, inject , input, computed, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Task } from "./task/task";
 import { AddTask } from './add-task/add-task';
 import { appService } from '../../app.service';
@@ -7,6 +7,8 @@ import { appService } from '../../app.service';
   imports: [Task, AddTask],
   templateUrl: './tasks.html',
   styleUrl: './tasks.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class Tasks implements OnInit{
   userId = input.required<number>();

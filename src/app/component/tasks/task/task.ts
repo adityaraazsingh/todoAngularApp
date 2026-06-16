@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit  } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, OnInit  } from '@angular/core';
 import { Cards } from "../../../reuseable/cards/cards";
 import { TaskDetails } from '../../../bo/tasksBo';
 import { DatePipe } from '@angular/common';
@@ -9,6 +9,8 @@ import { appService } from '../../../app.service';
   imports: [Cards, DatePipe],
   templateUrl: './task.html',
   styleUrl: './task.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 export class Task {
   task = input.required<TaskDetails>();

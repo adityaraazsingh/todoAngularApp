@@ -2,6 +2,7 @@ package com.todo.backend.controllers;
 
 import com.todo.backend.Enum.rolesEnum;
 import com.todo.backend.bo.LoginCredential;
+import com.todo.backend.bo.userDTO;
 import com.todo.backend.entity.userEntity;
 import com.todo.backend.repo.usersRepository;
 import com.todo.backend.security.jwtUtil;
@@ -53,17 +54,14 @@ public class usersController {
   }
 
   @PostMapping(value = "/add-user")
-  private userEntity signUp( @RequestParam("userName") String userName,
-                             @RequestParam("password") String password,
-                             @RequestParam("role") rolesEnum role,
-                             @RequestParam(value = "manages",required = false) Long[] manages,
-                             @RequestParam(value = "avatar", required = false) MultipartFile avatar) throws IOException {
+  private userEntity signUp( @RequestPart("user") userDTO userDto,
+                             @RequestPart(value = "avatar", required = false) MultipartFile avatar) throws IOException {
     userEntity user = new userEntity();
-    user.setUserName(userName);
-    user.setPassword(password);
-    user.setRole(role);
-    user.setManages(manages);
-    user.setAvatar(fileService.save(avatar,userName));
+    user.setUserName(userDto.getUserName());
+    user.setPassword(userDto.getPassword());
+    user.setRole(userDto.getRole());
+    user.setManages(userDto.getManages());
+    user.setAvatar(fileService.save(avatar,userDto.getUserName()));
 
     return userService.saveUser(user);
   }

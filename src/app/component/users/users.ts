@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output , output , signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output , output , signal} from '@angular/core';
 import { User } from "./user/user";
 import {mockUsers} from "./user/user.mock";
 import { appService } from '../../app.service';
@@ -9,6 +9,8 @@ import { userCred } from '../../bo/userCreds';
   imports: [User],
   templateUrl: './users.html',
   styleUrl: './users.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
+
 })
 
 export class Users implements OnInit {
