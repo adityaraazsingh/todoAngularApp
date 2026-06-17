@@ -6,6 +6,7 @@ import { authCred } from "./bo/authCreds";
 import { RolesEnum, userCred } from "./bo/userCreds";
 import { Router } from "@angular/router";
 import { jwtDecode } from "jwt-decode";
+import { userDTO } from "./bo/userDTO";
 
 @Injectable({providedIn : 'root'})
 
@@ -33,6 +34,14 @@ export class appService{
 
   loadTasksPerRender(){
     this.loadTasks();
+  }
+
+  getUser(){
+    return this.httpClient.get<userDTO>("http://localhost:8080/api/users",{
+      params :{
+        id : this.userId
+      }
+    })
   }
 
   mockTasks(userId : number) {
@@ -70,6 +79,10 @@ export class appService{
         userName : this.userName
       }
     });
+  }
+
+  updateUser(user : userDTO){
+    return this.httpClient.put("http://localhost:8080/api/users/update",user);
   }
 
   addAndUpdateTask(task : TaskDetails){

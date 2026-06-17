@@ -1,0 +1,97 @@
+.dialog {
+  display: block;
+  width: 500px;
+  height: 500px;
+  background: rgb(255, 255, 255);
+  border-radius: 10%;
+  z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  padding: 1rem;
+}
+
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.4); /* dim background */
+  z-index: 999; /* just below your dialog */
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+form p {
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+label {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+input {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+input:focus {
+  border-color: #0f172a;
+  background: #ffffff;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+button {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.9rem 1.15rem;
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+button[type="button"] {
+  background: transparent;
+  color: #0f172a;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  padding: 0.9rem 1.15rem;
+  background: #8d8e8f;
+  color: #ffffff;
+  font-weight: 700;
+  cursor:not-allowed;
+  /* transition: background 0.2s ease, transform 0.15s ease; */
+}
+

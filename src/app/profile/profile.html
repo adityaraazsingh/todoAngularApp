@@ -1,0 +1,27 @@
+<div class="backdrop" (click)="onCloseDialogEvent()">
+    
+</div>
+<div class="dialog">
+    @if(this.user()){
+        <img [src]="'http://localhost:8080/uploads/' + this.user().userName + '.jpg'" />
+        <p>Hello {{this.user().userName}} </p>
+        <form [formGroup]="form">
+            <p>
+                <label for="userName" >User Name</label>
+                <input formControlName="userName" disable/>
+            </p>
+            <p>
+                <label for="role">Role</label>
+                <input formControlName="role"/>
+            </p>
+            <p>
+                <label for="manages">Manages</label>
+                <input formControlName="manages"/>
+            </p>
+            <button (click)="onCloseDialogEvent()">Close</button>
+            <button (click)="onSubmit()">Update</button>
+        </form>
+    }@else {
+        information is being loaded ....
+    }
+</div>

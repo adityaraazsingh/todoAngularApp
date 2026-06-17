@@ -1,16 +1,20 @@
 import { Component, inject , OnInit, signal} from '@angular/core';
 import { appService } from '../../app.service';
+import { Profile } from '../../profile/profile';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [
+    Profile
+  ],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
 export class Header implements OnInit {
 
   appService = inject(appService);
-  userName = signal<string>("shiva");
+  userName = signal<string>("");
+  showProfile : boolean =  false;
 
   ngOnInit() {
     this.userName.set(this.appService.userName);
@@ -18,5 +22,13 @@ export class Header implements OnInit {
 
   logout() {
     this.appService.logout();
+  }
+
+  onCloseProfile(){
+    this.showProfile = false;
+  }
+
+  onOpenProfile(){
+    this.showProfile = true;
   }
 }

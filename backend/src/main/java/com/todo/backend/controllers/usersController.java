@@ -42,6 +42,11 @@ public class usersController {
   @Autowired
   private fileService fileService;
 
+  @GetMapping
+  private userEntity getUser(@RequestParam Long id){
+    return this.userRepository.findByUserId(id);
+  }
+
   @GetMapping("/role")
   private rolesEnum getUsersRole(@RequestParam String userName){
     rolesEnum role = this.userRepository.findByUserName(userName).getRole();
@@ -64,6 +69,12 @@ public class usersController {
     user.setAvatar(fileService.save(avatar,userDto.getUserName()));
 
     return userService.saveUser(user);
+  }
+
+  @PutMapping("/update")
+  private userEntity updateUser(@RequestBody userEntity user){
+    user.setPassword(this.userRepository.findByUserId(user.getUserId()).getPassword());
+    return this.userRepository.save(user);
   }
 
   @PostMapping

@@ -1,13 +1,11 @@
-export enum RolesEnum{
-    ADMIN = 'ADMIN',
-    USER = 'USER'
-}
+import { RolesEnum } from "./userCreds";
 
-export interface userCred{
+export interface userDTO{
     userId?: number,
     userName : string;
     password? : string;
-    avatar? : File;
+    avatar? : string;
     manages : number[];
     role : RolesEnum;
+    id? : number;
 }

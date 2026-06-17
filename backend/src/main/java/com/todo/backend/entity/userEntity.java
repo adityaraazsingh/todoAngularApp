@@ -18,6 +18,7 @@ public class userEntity {
   private String userName;
   private String password;
   private String avatar;
+  private Long[] manages;
 
   @Enumerated(EnumType.STRING)
   private rolesEnum role;
@@ -30,7 +31,6 @@ public class userEntity {
     this.role = role;
   }
 
-  private Long[] manages;
 
   public Long getUserId() {
     return userId;

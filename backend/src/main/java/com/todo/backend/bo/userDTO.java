@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class userDTO {
   private String userName;
   private String password;
-//  private MultipartFile avatar;
   private rolesEnum role;
   private Long[] manages;
 
@@ -36,14 +35,6 @@ public class userDTO {
   public void setPassword(String password) {
     this.password = password;
   }
-
-//  public MultipartFile getAvatar() {
-//    return avatar;
-//  }
-//
-//  public void setAvatar(MultipartFile avatar) {
-//    this.avatar = avatar;
-//  }
 
   public rolesEnum getRole() {
     return role;
