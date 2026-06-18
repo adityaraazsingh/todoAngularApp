@@ -25,11 +25,11 @@ export class Login implements OnInit{
   selectedFile: File | null = null;
 
   hasError = signal<boolean>(false);
-
+// TODO : username need be set properly 
   form = new FormGroup({
-    userName : new FormControl('ADMIN_adi' ,[Validators.required]),
-    password : new FormControl('123123'),
-    role: new FormControl(RolesEnum.USER),
+    userName : new FormControl('' ,[Validators.required]),
+    password : new FormControl(''),
+    role: new FormControl(),
     assets : new FormControl(),
     manages : new FormControl<number[]>([])
   })

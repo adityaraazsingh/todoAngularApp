@@ -177,6 +177,7 @@
   font-size: 0.95rem;
   outline: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .profile-form .form-group input:focus:not([disabled]) {
@@ -186,9 +187,35 @@
 }
 
 .profile-form .form-group input:disabled {
-  opacity: 0.7;
+  opacity: 0.6;
   cursor: not-allowed;
   background: #f1f5f9;
+  color: #94a3b8;
+}
+
+/* Validation messages */
+.success-message,
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.success-message {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+}
+
+.error-message {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
 }
 
 /* Action Buttons */
@@ -216,11 +243,13 @@
 
 .btn-secondary:disabled,
 .btn-primary:disabled {
-  background-color: #ccc;
-  color: #666;
-  border-color: #bbb;
+  background-color: #e2e8f0;
+  color: #94a3b8;
+  border-color: #e6e9ef;
   cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.8;
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-secondary {
@@ -229,7 +258,7 @@
   color: #475569;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover:not(:disabled) {
   background: #f8fafc;
   border-color: #d1d5db;
 }
@@ -240,7 +269,7 @@
   color: #ffffff;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   background: #1e293b;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
