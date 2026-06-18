@@ -14,13 +14,19 @@
       <label for="password">Password</label>
       <input id="password" type="password" formControlName="password" placeholder="Enter your password" />
         @if(!isLoggingIn){
-            <label for="assets">Assets</label>
-            <input id="assets" type="file" formControlName="assets" placeholder="Enter assets" (change)="onFileSelected($event)" />
+            <label for="assets">Avatar</label>
+            <div class="file-input-wrapper">
+              <input id="assets" type="file" formControlName="assets" (change)="onFileSelected($event)" />
+              <span class="file-input-label">
+                <span class="material-icons-round">upload</span>
+                {{ selectedFile ? selectedFile.name : 'Choose a profile picture' }}
+              </span>
+            </div>
             <label for="role">Choose your role</label>
-            <mat-selection-list formControlName="role" [multiple]="false">
-              <mat-list-item value='ADMIN'>Admin</mat-list-item>
-              <mat-list-item value='USER'>User</mat-list-item>
-            </mat-selection-list>
+            <mat-radio-group formControlName="role">
+              <mat-radio-button value="ADMIN">Admin</mat-radio-button>
+              <mat-radio-button value="USER">User</mat-radio-button>
+            </mat-radio-group>
             <label>Select the user you will be going to manage</label>
             @if(this.form.value.role === "ADMIN"){
               <mat-selection-list formControlName="manages">
@@ -31,7 +37,10 @@
             }
         }
         @if(this.hasError()){
-          <p style="color: red;">Username or password is incorrect. Please try again !</p>
+          <p class="error-message">
+            <span class="material-icons-round">error_outline</span>
+            Username or password is incorrect. Please try again.
+          </p>
         }
       <div class="login-actions">
         <button type="submit" class="primary-button">

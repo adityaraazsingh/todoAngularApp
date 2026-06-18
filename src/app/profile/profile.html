@@ -37,9 +37,9 @@
           <input id="userName" type="text" formControlName="userName" />
           @if(editingUserName === true && form.controls.userName.touched){
             @if(isUnique() === true) {
-              <p class="success-message" style="color: green;">Username is unique.</p>
+              <p class="success-message">Username is unique.</p>
             }@else {
-              <p class="error-message" style="color: red;">Username already exists. Please choose a different one.</p>
+              <p class="error-message">Username already exists. Please choose a different one.</p>
             }
           }
         </div>

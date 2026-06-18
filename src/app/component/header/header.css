@@ -6,6 +6,7 @@
   border-radius: 18px;
   background: #ffffff;
   border: 1px solid #e6e9ef;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
 }
 
 .header-left h1 {
@@ -19,13 +20,13 @@
 .header-left p {
   margin: 0.35rem 0 0;
   color: #64748b;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
 }
 
 .header-right {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .profile-button {
@@ -41,8 +42,14 @@
 }
 
 .profile-button:hover {
-  background: #f8fafc;
+  background: #f1f5f9;
   border-color: #d1d5db;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+.profile-button:active {
+  transform: translateY(0);
 }
 
 .profile-name {
@@ -78,6 +85,11 @@
   background: #fef2f2;
   border-color: #fecaca;
   color: #dc2626;
+  transform: translateY(-1px);
+}
+
+.logout-button:active {
+  transform: translateY(0);
 }
 
 .logout-button .material-icons-round {

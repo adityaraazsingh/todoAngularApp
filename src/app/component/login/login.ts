@@ -6,11 +6,11 @@ import { Router } from '@angular/router';
 import { RolesEnum, userCred } from '../../bo/userCreds';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectionList } from '@angular/material/list';
-
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule ,MatListModule , MatSelectionList],
+  imports: [ReactiveFormsModule ,MatListModule , MatSelectionList , MatRadioModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

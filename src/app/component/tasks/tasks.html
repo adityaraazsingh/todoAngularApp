@@ -15,7 +15,7 @@
       <h2>Task Board</h2>
       <p>Stay focused with a crisp task list and a clean workspace.</p>
     </div>
-    <mat-icon (click)="changeSort()" style="cursor: pointer;" >sort</mat-icon>
+    <mat-icon class="sort-icon" (click)="changeSort()">sort</mat-icon>
     <button class="add-task-button" type="button" (click)="toggleDialog()">Add Task</button>
   </div>
 
@@ -26,7 +26,7 @@
         <app-task [task]="task" (onEditClickTask)="onEditTask($event)" ></app-task>
       }
     }@else {
-      <p class="empty-label" style="text-align: center;">Select a person to see their tasks {{this.role}}</p>
+      <p class="empty-label">Select a person to see their tasks {{this.role}}</p>
     }
   </div>
 </section>
