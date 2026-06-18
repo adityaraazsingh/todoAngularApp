@@ -101,6 +101,18 @@ public class usersController {
     return this.userRepository.findByUserIdIn(ids);
   }
 
+  @PostMapping("/uniqueUserName")
+  private Boolean checkUniqueUserName(@RequestParam String userName){
+
+    userEntity user = this.userRepository.findByUserName(userName);
+
+    if(user == null){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 //  @GetMapping("/avatar/{id}")
 //  public ResponseEntity<byte[]> getAvatarById(@PathVariable Long id){
 //    userEntity user = this.userRepository.findByUserId(id);

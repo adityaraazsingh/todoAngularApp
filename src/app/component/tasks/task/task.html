@@ -1,14 +1,29 @@
-@if(!task().completed){
+@if(task()){
   <app-cards>
     <div class="task-card">
-      <div>
-        <h3>{{ task().title }}</h3>
-        <p>{{ task().description }}</p>
-        <p>{{ task().date | date }}</p>
+      <div class="task-content">
+        <div class="task-status"></div>
+        <div class="task-details">
+          <h3 [style.text-decoration]="task().completed ? 'line-through' : 'none'">{{ task().title }}</h3>
+          <p class="task-description" [style.text-decoration]="task().completed ? 'line-through' : 'none'">{{ task().description }}</p>
+          <span class="task-date">
+            <span class="material-icons-round">calendar_today</span>
+            {{ task().date | date }}
+          </span>
+        </div>
       </div>
-      <div style="display: flex ; gap:10px ; justify-content: center;align-items: center;">
-        <mat-icon style="cursor: pointer;" (click)="onEditClick(task())" class="material-icons-round">edit</mat-icon>
-        <button class="complete-button"  (click)="onCompleteClick(task())">Mark as Complete</button>
+      <div class="task-actions">
+        @if(!task().completed){
+        <button class="edit-btn" (click)="onEditClick(task())">
+          <span class="material-icons-round">edit</span>
+        </button>
+          <button class="complete-button" (click)="onCompleteClick(task())">
+            <span class="material-icons-round">check_circle</span>
+            Mark Complete
+          </button>
+        }@else {
+          <span class="material-icons-round">check</span>
+        }
       </div>
     </div>
   </app-cards>

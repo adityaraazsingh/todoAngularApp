@@ -1,11 +1,13 @@
 import { Component, inject , OnInit, signal} from '@angular/core';
 import { appService } from '../../app.service';
 import { Profile } from '../../profile/profile';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
   imports: [
-    Profile
+    Profile,
+    MatIconModule
   ],
   templateUrl: './header.html',
   styleUrl: './header.css',

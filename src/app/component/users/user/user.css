@@ -1,29 +1,50 @@
 .user-row {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.95rem 1rem;
-  border-radius: 16px;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
   background: #f8fafc;
-  border: 1px solid #e6e9ef;
+  border: 1px solid transparent;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .user-row:hover {
-  background: #eef2f7;
+  background: #ffffff;
+  border-color: #e6e9ef;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+.avatar-wrapper {
+  flex-shrink: 0;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.user-info {
+  min-width: 0;
 }
 
 .user-name {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: #0f172a;
+}
+
+.user-role {
+  display: inline-block;
+  margin-top: 0.15rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }

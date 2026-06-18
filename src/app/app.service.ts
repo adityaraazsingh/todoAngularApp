@@ -19,6 +19,7 @@ export class appService{
   userName! : string;
   role! : RolesEnum;
   userId ! : number;
+  userUpdated = signal(0);
 
   private loadTasks(){
     this.httpClient.get<TaskDetails[]>('http://localhost:8080/api/tasks').subscribe(
@@ -44,8 +45,17 @@ export class appService{
     })
   }
 
+  checkUniqueUsername(userName : string){
+    return this.httpClient.post<boolean>("http://localhost:8080/api/users/uniqueUserName",null,{
+      params:{
+        userName : userName,
+      }
+    })
+  }
+
   mockTasks(userId : number) {
     return this.allTasks().filter(task => task.userId === userId);
+    // return this.allTasks();
   }
 
   getAllUser(){

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, inject, OnInit, Output , output , signal} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, EventEmitter, inject, OnInit, Output , output , signal} from '@angular/core';
 import { User } from "./user/user";
 import {mockUsers} from "./user/user.mock";
 import { appService } from '../../app.service';
@@ -13,13 +13,20 @@ import { userCred } from '../../bo/userCreds';
 
 })
 
-export class Users implements OnInit {
+export class Users {
   users= signal<userCred[]>([]);
   userId = output<number>();
   appService = inject(appService);
   usersAll! : userCred[];
 
-  ngOnInit(): void {
+  constructor(){
+    effect(()=>{
+      this.appService.userUpdated();
+      this.loadUsers();
+    })
+  }
+
+  loadUsers(){
     this.appService.getUserYouManages().subscribe(
       (data)=>{
         this.users.set(data)

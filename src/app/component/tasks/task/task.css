@@ -2,41 +2,109 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1rem 1.2rem;
-  border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid #e6e9ef;
+  align-items: flex-start;
 }
 
-.task-card h3 {
+.task-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.task-status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3b82f6;
+  margin-top: 0.45rem;
+  flex-shrink: 0;
+}
+
+.task-details {
+  min-width: 0;
+}
+
+.task-details h3 {
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
   color: #0f172a;
 }
 
-.task-card p {
-  margin: 0.5rem 0 0;
+.task-description {
+  margin: 0.35rem 0 0;
   color: #475569;
-  font-size: 0.96rem;
-  line-height: 1.6;
-  max-width: 40rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.task-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.task-date .material-icons-round {
+  font-size: 14px;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid #e6e9ef;
+  background: #ffffff;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-btn:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #d1d5db;
+}
+
+.edit-btn .material-icons-round {
+  font-size: 16px;
 }
 
 .complete-button {
-  border: 1px solid #d1d5db;
-  border-radius: 999px;
-  padding: 0.75rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 1rem;
   background: #0f172a;
   color: #ffffff;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 0.8rem;
   cursor: pointer;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition: all 0.2s ease;
 }
 
 .complete-button:hover {
+  background: #1e293b;
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.complete-button .material-icons-round {
+  font-size: 16px;
 }

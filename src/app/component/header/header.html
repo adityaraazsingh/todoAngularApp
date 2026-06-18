@@ -1,14 +1,25 @@
-<div class="header" style="display: flex;">
-    <p class="profile-button" style="display: flex; align-items: center; gap: 10px;">
-         <span style="font-size: 1.2rem; font-weight: 500;">{{userName().split('_')[1]}}</span>
-        <img (click)="onOpenProfile()" [src]="'http://localhost:8080/uploads/'+userName()+'.jpg'" style="width: 80px; height: 80px;object-fit:contain;border-radius: 50%;"  loading="lazy"/>
-    </p>
-    <div style="width: 95%;">
-        <h1>Todo List </h1>
-        <p>Welcome to your todo list!</p>
-    </div>
-    <button class="logout-button" type="button" (click)="logout()">Logout</button>
+<div class="header">
+  <div class="header-left">
+    <h1>Todo List</h1>
+    <p>Welcome to your todo list!</p>
+  </div>
+  <div class="header-right">
+    <button class="logout-button" type="button" (click)="logout()">
+      <span class="material-icons-round">logout</span>
+      Logout
+    </button>
+    <button class="profile-button" type="button" (click)="onOpenProfile()">
+      <span class="profile-name">{{ userName().split('_')[1] }}</span>
+      <img
+        [src]="'http://localhost:8080/uploads/' + userName() + '.jpg'"
+        [alt]="userName() + 's avatar'"
+        class="profile-avatar"
+        loading="lazy"
+      />
+    </button>
+  </div>
 </div>
-@if(this.showProfile){
-    <app-profile (onCloseDialog)="onCloseProfile()" ></app-profile>
+
+@if (this.showProfile) {
+  <app-profile (onCloseDialog)="onCloseProfile()"></app-profile>
 }

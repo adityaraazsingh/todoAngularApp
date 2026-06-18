@@ -17,17 +17,17 @@
             <label for="assets">Assets</label>
             <input id="assets" type="file" formControlName="assets" placeholder="Enter assets" (change)="onFileSelected($event)" />
             <label for="role">Choose your role</label>
-            <select formControlName="role">
-              <option value='ADMIN'>Admin</option>
-              <option value='USER'>User</option>
-            </select>
+            <mat-selection-list formControlName="role" [multiple]="false">
+              <mat-list-item value='ADMIN'>Admin</mat-list-item>
+              <mat-list-item value='USER'>User</mat-list-item>
+            </mat-selection-list>
             <label>Select the user you will be going to manage</label>
             @if(this.form.value.role === "ADMIN"){
-              <select formControlName="manages" multiple>
+              <mat-selection-list formControlName="manages">
                 @for (user of users; track user.userId) {
-                  <option [value]="user.userId">{{user.userName}}</option>
+                  <mat-list-option [value]="user.userId">{{user.userName}}</mat-list-option>
                 }
-              </select>
+              </mat-selection-list>
             }
         }
         @if(this.hasError()){

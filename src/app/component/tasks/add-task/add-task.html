@@ -1,25 +1,44 @@
 <dialog class="add-task-dialog" open>
   <div class="dialog-card">
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-      <p>
-        <label>Enter the Title</label>
-        <input name="title" type="text" formControlName="title" required />
-      </p>
-      <p>
-        <label>Enter the Description</label>
-        <input name="description" type="text" formControlName="description" required/>
-      </p>
-      <p>
-        <label>Enter the Date</label>
-        <input name="date" type="date" formControlName="date" required/>
-      </p>
-      @if(form.invalid && form.touched){
-        <p style="color: red;">Please fill in all required fields.</p>
+    <div class="dialog-header">
+      <h3>
+        <span class="material-icons-round">add_task</span>
+        New Task
+      </h3>
+      <button class="close-dialog-btn" type="button" (click)="onClose()">
+        <span class="material-icons-round">close</span>
+      </button>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form" class="add-task-form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" formControlName="title" placeholder="What needs to be done?" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input id="description" name="description" type="text" formControlName="description" placeholder="Add some details..." required />
+      </div>
+
+      <div class="form-group">
+        <label for="date">Due Date</label>
+        <input id="date" name="date" type="date" formControlName="date" required />
+      </div>
+
+      @if (form.invalid && form.touched) {
+        <p class="validation-error">
+          <span class="material-icons-round">error_outline</span>
+          Please fill in all required fields.
+        </p>
       }
-      <!-- TODO : Add validation for when date is empty add task gets enabled -->
+
       <div class="dialog-actions">
-        <button type="button" (click)="onClose()">Cancel</button>
-        <button [disabled]="form.invalid" type="submit">Add Task</button>
+        <button class="btn-secondary" type="button" (click)="onClose()">Cancel</button>
+        <button class="btn-primary" [disabled]="form.invalid" type="submit">
+          <span class="material-icons-round">add</span>
+          Add Task
+        </button>
       </div>
     </form>
   </div>

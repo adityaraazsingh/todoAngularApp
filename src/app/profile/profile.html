@@ -1,27 +1,85 @@
-<div class="backdrop" (click)="onCloseDialogEvent()">
-    
-</div>
+<div class="backdrop" (click)="onCloseDialogEvent()"></div>
+
 <div class="dialog">
-    @if(this.user()){
-        <img [src]="'http://localhost:8080/uploads/' + this.user().userName + '.jpg'" />
-        <p>Hello {{this.user().userName}} </p>
-        <form [formGroup]="form">
-            <p>
-                <label for="userName" >User Name</label>
-                <input formControlName="userName" disable/>
-            </p>
-            <p>
-                <label for="role">Role</label>
-                <input formControlName="role"/>
-            </p>
-            <p>
-                <label for="manages">Manages</label>
-                <input formControlName="manages"/>
-            </p>
-            <button (click)="onCloseDialogEvent()">Close</button>
-            <button (click)="onSubmit()">Update</button>
-        </form>
-    }@else {
-        information is being loaded ....
-    }
+  <button class="close-btn" type="button" (click)="onCloseDialogEvent()" aria-label="Close">
+    <span class="material-icons-round">close</span>
+  </button>
+
+  @if (this.user()) {
+    <div class="dialog-scroll">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="avatar-wrapper">
+          <img
+            [src]="avatarUrl()"
+            [alt]="this.user().userName + 's avatar'"
+            class="avatar"
+            loading="lazy"
+          />
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="profile-info">
+          <h2 class="profile-name">{{ this.user().userName.split('_')[1] }}</h2>
+          <span class="role-badge" [class.admin]="this.user().role === 'ADMIN'">
+            {{ this.user().role }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Form Section -->
+      <form [formGroup]="form" class="profile-form">
+        <div class="form-group">
+          <label for="userName">
+            <span class="material-icons-round label-icon">person</span>
+            Username
+            <span class="material-icons-round label-icon" (click)="onEditUserNameClick()">edit</span>
+          </label>
+          <input id="userName" type="text" formControlName="userName" />
+          @if(editingUserName === true && form.controls.userName.touched){
+            @if(isUnique() === true) {
+              <p class="success-message" style="color: green;">Username is unique.</p>
+            }@else {
+              <p class="error-message" style="color: red;">Username already exists. Please choose a different one.</p>
+            }
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="role">
+            <span class="material-icons-round label-icon">shield</span>
+            Role
+          </label>
+          <input id="role" type="text" formControlName="role"/>
+        </div>
+
+        <div class="form-group">
+          <label for="manages">
+            <span class="material-icons-round label-icon">group</span>
+            Manages
+          </label>
+          <mat-selection-list formControlName="manages">
+            @for (user of users; track user.userId) {
+              <mat-list-option [value]="user.userId">
+                {{ user.userName }}
+              </mat-list-option>
+            }
+          </mat-selection-list>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="dialog-actions">
+          <button class="btn-secondary" type="button" (click)="onCloseDialogEvent()">Cancel</button>
+          <button class="btn-primary" type="button" (click)="onSubmit()" [disabled]="!form.touched ||disableSaveBtn " >
+            <span class="material-icons-round">check</span>
+            Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  } @else {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading profile...</p>
+    </div>
+  }
 </div>
